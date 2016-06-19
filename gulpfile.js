@@ -10,4 +10,8 @@ gulp.task('htmlone', function () {
     .pipe(gulp.dest('./dist'));
 });
 
+gulp.task('min', function() {
+    
+});
+
 gulp.task('default', ['htmlone']);

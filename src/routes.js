@@ -1,25 +1,25 @@
-import App from './app.jsx';
+import pages from './pages.json';
+import checkAuth from './util/checkAuth.js';
 
 const routes = {
     component: 'div',
     childRoutes: [{
         path: '/',
-        component: App,
+        component: require('./components/app.jsx'),
+        onEnter: () => {
+
+        },
         getIndexRoute(location, callback) {
             require.ensure([], function(require) {
                 callback(null, {
-                    component: require('./p/index.jsx')
+                    component: require('./routes/index/components/index.jsx')
                 })
             }, 'index')
         },
-        childRoutes: [{
-            path: 'user',
-            getComponent(location, callback) {
-                require.ensure([], function(require) {
-                    callback(null, require('./p/user.jsx'));
-                }, 'user');
-            }
-        }]
+        childRoutes: [
+            // require('./routes/index/index.js'),
+            require('./routes/user/index.js')
+        ]
 
     }]
 }

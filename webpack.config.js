@@ -2,6 +2,11 @@ var webpack = require('webpack');
 var CleanWebpackPlugin = require('clean-webpack-plugin'); //清理插件
 var HtmlWebpackPlugin = require('html-webpack-plugin'); //html
 
+var fs = require('fs');
+var path = require('path');
+var dirs = fs.readdirSync(path.resolve(__dirname, 'src/routes/'));
+fs.writeFileSync(path.resolve(__dirname, 'src/pages.json'), JSON.stringify(dirs, null, 4));
+
 module.exports = {
     entry: {
         common: ['./src/index.jsx'],
@@ -18,7 +23,7 @@ module.exports = {
             exclude: /(node_modules|bower_components)/,
             loader: 'babel', // 'babel-loader' is also a legal name to reference
             query: {
-                presets: ['react', 'es2015']
+                presets: ['react', 'es2015', 'stage-1']
             }
         }, {
             test: /\.less$/,

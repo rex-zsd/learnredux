@@ -1,5 +1,6 @@
 const User = React.createClass({
     render() {
+        console.log('this is user.');
         return (
             <div>this is user.</div>
         )
