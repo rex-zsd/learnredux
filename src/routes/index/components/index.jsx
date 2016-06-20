@@ -6,11 +6,17 @@ const Index = React.createClass({
         str: React.PropTypes.string.isRequired
     },
     componentDidMount() {
-        this.props.dispatch(doSomething('123'));
+        // this.props.dispatch(doSomething('123'));
+    },
+    click() {
+        this.props.dispatch(doSomething('aaa'))
     },
     render() {
         return (
-            <div>123</div>
+            <div>
+                <div>{this.props.str}</div>
+                <button onClick={this.click}>click</button>
+            </div>
         )
     }
 });

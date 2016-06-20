@@ -23,8 +23,16 @@ module.exports = {
             exclude: /(node_modules|bower_components)/,
             loader: 'babel', // 'babel-loader' is also a legal name to reference
             query: {
-                presets: ['react', 'es2015', 'stage-1']
+                presets: ['react', 'es2015', 'stage-1'],
+                plugins: [
+                    ["antd", { "style": 'css' }]
+                ]
             }
+        }, {
+            test: /\.css$/,
+            include: /node_modules/,
+            exclude: './src/',
+            loader: 'style!css',
         }, {
             test: /\.less$/,
             loader: 'style!css?modules&localIdentName=[name]__[local]___[hash:base64:5]!less'
