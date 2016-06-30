@@ -9,7 +9,7 @@ const Index = React.createClass({
         // this.props.dispatch(doSomething('123'));
     },
     click() {
-        this.props.dispatch(doSomething('aaa'))
+        this.props.dispatch(doSomething('aaa'));
     },
     render() {
         return (

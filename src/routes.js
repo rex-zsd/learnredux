@@ -7,7 +7,7 @@ const routes = {
         path: '/',
         component: require('./components/app.jsx'),
         onEnter: () => {
-
+            console.log(123);
         },
         getIndexRoute(location, callback) {
             require.ensure([], function(require) {

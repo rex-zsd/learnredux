@@ -1,5 +1,5 @@
 //redux
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, compose } from 'redux';
 //react-router-redux
 import { routerReducer } from 'react-router-redux';
 //reducers
