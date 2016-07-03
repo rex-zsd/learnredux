@@ -1,5 +1,6 @@
 import './app.less';
 import Link from 'react-router/lib/Link';
+import React, {PropTypes} from 'react'
 // import 'normalize.css';
 // import 'antd/dist/antd.css';
 import {Menu, Breadcrumb, Icon} from 'antd';

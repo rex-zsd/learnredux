@@ -1,3 +1,5 @@
+import React, {PropTypes} from 'react'
+
 const User = React.createClass({
     render() {
         console.log('this is user.');
