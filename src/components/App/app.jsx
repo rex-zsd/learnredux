@@ -1,20 +1,26 @@
 import './app.less';
 import Link from 'react-router/lib/Link';
 import React, {PropTypes} from 'react'
-// import 'normalize.css';
-// import 'antd/dist/antd.css';
 import {Menu, Breadcrumb, Icon} from 'antd';
 const SubMenu = Menu.SubMenu;
 
-const AsideCollapse = React.createClass({
-    getInitialState() {
-        return {collapse: true};
-    },
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            collapse: true,
+            defaultSelectedKeys: [props.location.pathname]
+        };
+
+        this.onCollapseChange = this.onCollapseChange.bind(this);
+    }
+
     onCollapseChange() {
         this.setState({
             collapse: !this.state.collapse
-        })
-    },
+        });
+    }
+
     render() {
         const collapse = this.state.collapse;
         return (
@@ -23,23 +29,25 @@ const AsideCollapse = React.createClass({
                 : "ant-layout-aside"}>
                 <aside className="ant-layout-sider">
                     <div className="ant-layout-logo"></div>
-                    <Menu mode="inline" theme="dark" defaultSelectedKeys={['user']}>
-                        <SubMenu key="sub1" title={< span > <Icon type="mail"/> < span > 导航一 < /span></span >}></SubMenu>
-                        <Menu.Item key="user">
-                            <Link to="/">
+                    <Menu mode="inline" theme="dark" defaultSelectedKeys={this.state.defaultSelectedKeys}>
+                        <Menu.Item key="/index">
+                            <Link to="/index">
                                 <Icon type="user"/>
                                 <span className="nav-text">导航一</span>
                             </Link>
                         </Menu.Item>
-                        <Menu.Item key="setting">
+                        <Menu.Item key="/user">
                             <Link to="/user">
                                 <Icon type="setting"/>
                                 <span className="nav-text">导航二</span>
                             </Link>
                         </Menu.Item>
-                        <Menu.Item key="laptop">
-                            <Icon type="laptop"/>
-                            <span className="nav-text">导航三</span>
+                        <Menu.Item key="/login">
+                            <Link to="/login">
+                                <Icon type="laptop"/>
+                                <span className="nav-text">导航三</span>
+                            </Link>
+
                         </Menu.Item>
                         <Menu.Item key="notification">
                             <Icon type="notification"/>
@@ -81,6 +89,6 @@ const AsideCollapse = React.createClass({
             </div>
         );
     }
-});
-module.exports = AsideCollapse;
-// ReactDOM.render(<BrowserDemo><AsideCollapse /></BrowserDemo>, mountNode);
+}
+
+module.exports = App;

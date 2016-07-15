@@ -1,12 +1,7 @@
 var webpack = require('webpack');
 var CleanWebpackPlugin = require('clean-webpack-plugin'); //清理插件
 var HtmlWebpackPlugin = require('html-webpack-plugin'); //html
-var OpenBrowserPlugin = require('open-browser-webpack-plugin'); //打开浏览器
-
-var fs = require('fs');
-var path = require('path');
-var dirs = fs.readdirSync(path.resolve(__dirname, 'src/routes/'));
-fs.writeFileSync(path.resolve(__dirname, 'src/pages.json'), JSON.stringify(dirs, null, 4));
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     target: 'web',
@@ -25,7 +20,6 @@ module.exports = {
             'babel-polyfill', //babel-polyfill
         ]
     },
-    devtool: process.env.NODE_ENV === 'development' ? 'source-map' : '',
     output: {
         path: __dirname + '/dist',
         filename: "[name].bundle.js",
@@ -49,28 +43,17 @@ module.exports = {
             loader: 'style!css',
         }, {
             test: /\.less$/,
-            loader: 'style!css?modules&localIdentName=[name]__[local]___[hash:base64:5]!less'
+            loader: ExtractTextPlugin.extract('css?modules&localIdentName=[name]__[local]___[hash:base64:5]!less')
         }, {
-            test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-            loader: 'url?limit=10000&minetype=application/font-woff'
-        }, {
-            test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-            loader: 'url?limit=10&minetype=application/font-woff'
-        }, {
-            test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-            loader: 'url?limit=10&minetype=application/octet-stream'
-        }, {
-            test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-            loader: 'file'
-        }, {
-            test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-            loader: 'url?limit=10&minetype=image/svg+xml'
+            test: /\.(jpe?g|gif|png|svg)$/i,
+            loader: 'url-loader?limit=10000',
         }]
     },
     resolve: {
-        extensions: ['', '.js', '.jsx', '.json']
+        extensions: ['', '.js', '.jsx']
     },
     plugins: [
+        new ExtractTextPlugin('[name].css'),
         new CleanWebpackPlugin(['dist'], {
             root: __dirname, // An absolute path for the root.
             verbose: true, // Write logs to console.
@@ -81,14 +64,11 @@ module.exports = {
             minChunks: Infinity,
         }),
         new HtmlWebpackPlugin({
-            title: 'ttt',
+            title: 'learn redux',
             inject: true,
             hash: false,
             template: './src/index.html',
             favicon: './src/favicon.ico'
-        }),
-        new OpenBrowserPlugin({
-            url: 'http://localhost:8080'
         }),
         //注入变量
         new webpack.DefinePlugin({
@@ -97,9 +77,11 @@ module.exports = {
                 'NODE_ENV': JSON.stringify(process.env.NODE_ENV) //将Node环境设置为production使react使用正确的版本
             }
         }),
-        // //将模块加载到全局，其他模块可直接引用
-        // new webpack.ProvidePlugin({
-        //     'React': 'react'
-        // })
+        //压缩js
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            }
+        })
     ]
 };

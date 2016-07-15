@@ -5,7 +5,7 @@ import thunk from 'redux-thunk';
 //react-router-redux
 import { routerReducer as routing } from 'react-router-redux';
 //reducers
-import * as reducers from './reducers/index.js';
+import * as reducers from './reducers';
 
 const rootReducer = combineReducers({
     ...reducers,
@@ -19,7 +19,10 @@ export default function configureStore(initialState = {}) {
     ];
     //开发环境下启用redux-devTool
     if (process.env.CLIENT && process.env.NODE_ENV === 'development') {
-        enhancers.push(window.devToolsExtension ? window.devToolsExtension() : DevTools.instrument());
+        const devToolsExtension = window.devToolsExtension
+        if (typeof devToolsExtension === 'function') {
+            enhancers.push(devToolsExtension);
+        }
     }
 
     const store = createStore(rootReducer, initialState, compose(...enhancers));
