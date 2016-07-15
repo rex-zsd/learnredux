@@ -1,8 +1,6 @@
 const webpack = require('webpack');
-const CleanWebpackPlugin = require('clean-webpack-plugin'); //清理插件
 const HtmlWebpackPlugin = require('html-webpack-plugin'); //html
 const OpenBrowserPlugin = require('open-browser-webpack-plugin'); //打开浏览器
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const port = 9001;
 
@@ -31,6 +29,7 @@ const webpackConfig = {
             'react-router-redux',
             'whatwg-fetch', //fetch polyfill
             'babel-polyfill', //babel-polyfill
+            'es5-shim'
         ]
     },
     devtool: 'source-map',
@@ -59,33 +58,15 @@ const webpackConfig = {
             test: /\.less$/,
             loader: 'style!css?modules&localIdentName=[name]__[local]___[hash:base64:5]!less'
         }, {
-            test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-            loader: 'url?limit=10000&minetype=application/font-woff'
-        }, {
-            test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-            loader: 'url?limit=10&minetype=application/font-woff'
-        }, {
-            test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-            loader: 'url?limit=10&minetype=application/octet-stream'
-        }, {
-            test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-            loader: 'file'
-        }, {
-            test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-            loader: 'url?limit=10&minetype=image/svg+xml'
+            test: /\.(jpe?g|gif|png|svg)$/i,
+            loader: 'url-loader?limit=10000',
         }]
     },
     resolve: {
-        extensions: ['', '.js', '.jsx', '.json']
+        extensions: ['', '.js', '.jsx']
     },
     plugins: [
-        new ExtractTextPlugin('[name].css'),
         new webpack.HotModuleReplacementPlugin(),
-        new CleanWebpackPlugin(['dist'], {
-            root: __dirname, // An absolute path for the root.
-            verbose: true, // Write logs to console.
-            dry: false // Do not delete anything, good for testing.
-        }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'common',
             minChunks: Infinity,
@@ -93,9 +74,12 @@ const webpackConfig = {
         new HtmlWebpackPlugin({
             title: 'learn redux',
             inject: true,
-            hash: false,
+            hash: true,
             template: './src/index.html',
-            favicon: './src/favicon.ico'
+            favicon: './src/static/favicon.ico',
+            minify: {
+                collapseWhitespace: true
+            }
         }),
         new OpenBrowserPlugin({
             url: 'http://localhost:' + port
@@ -104,7 +88,7 @@ const webpackConfig = {
         new webpack.DefinePlugin({
             'process.env': {
                 'CLIENT': JSON.stringify(true),
-                'NODE_ENV': JSON.stringify(process.env.NODE_ENV) //将Node环境设置为production使react使用正确的版本
+                'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
             }
         })
     ]

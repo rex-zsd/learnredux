@@ -1,4 +1,4 @@
-import { DO_SOMETHING } from '../constant.js';
+export const DO_SOMETHING = 'DO_SOMETHING';
 
 export function doSomething(str) {
     return {

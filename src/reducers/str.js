@@ -1,4 +1,4 @@
-import { DO_SOMETHING } from '../constant.js';
+import { DO_SOMETHING } from '../actions/str';
 
 function str(state = '', action) {
     switch (action.type) {

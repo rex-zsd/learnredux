@@ -18,6 +18,7 @@ module.exports = {
             'react-router-redux',
             'whatwg-fetch', //fetch polyfill
             'babel-polyfill', //babel-polyfill
+            'es5-shim'
         ]
     },
     output: {
@@ -43,7 +44,7 @@ module.exports = {
             loader: 'style!css',
         }, {
             test: /\.less$/,
-            loader: ExtractTextPlugin.extract('css?modules&localIdentName=[name]__[local]___[hash:base64:5]!less')
+            loader: 'style!css?modules&localIdentName=[name]__[local]___[hash:base64:5]!less'
         }, {
             test: /\.(jpe?g|gif|png|svg)$/i,
             loader: 'url-loader?limit=10000',
@@ -53,7 +54,6 @@ module.exports = {
         extensions: ['', '.js', '.jsx']
     },
     plugins: [
-        new ExtractTextPlugin('[name].css'),
         new CleanWebpackPlugin(['dist'], {
             root: __dirname, // An absolute path for the root.
             verbose: true, // Write logs to console.
@@ -66,9 +66,12 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: 'learn redux',
             inject: true,
-            hash: false,
+            hash: true,
             template: './src/index.html',
-            favicon: './src/favicon.ico'
+            favicon: './src/static/favicon.ico',
+            minify: {
+                collapseWhitespace: true
+            }
         }),
         //注入变量
         new webpack.DefinePlugin({
@@ -79,6 +82,9 @@ module.exports = {
         }),
         //压缩js
         new webpack.optimize.UglifyJsPlugin({
+            output: {
+                comments: false
+            },
             compress: {
                 warnings: false
             }

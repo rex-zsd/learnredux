@@ -21,10 +21,9 @@ export default function configureStore(initialState = {}) {
     if (process.env.CLIENT && process.env.NODE_ENV === 'development') {
         const devToolsExtension = window.devToolsExtension
         if (typeof devToolsExtension === 'function') {
-            enhancers.push(devToolsExtension);
+            enhancers.push(devToolsExtension());
         }
     }
-
     const store = createStore(rootReducer, initialState, compose(...enhancers));
     return store;
 }

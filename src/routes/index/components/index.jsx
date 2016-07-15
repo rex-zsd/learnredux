@@ -2,7 +2,7 @@ import {connect} from 'react-redux';
 import {doSomething} from '../../../actions/str.js';
 import React, {PropTypes} from 'react';
 import style from './style.less';
-import co from 'co';
+// import co from 'co';
 
 const propTypes = {
     str: PropTypes.string.isRequired

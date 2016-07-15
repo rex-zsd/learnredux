@@ -4,11 +4,12 @@ const routes = {
     component: 'div',
     childRoutes: [{
         path: '/',
-        getComponent(location, callback) {
-            require.ensure([], function(require) {
-                callback(null, require('../components/App/app.jsx'));
-            }, 'app');
-        },
+        // getComponent(location, callback) {
+        //     require.ensure([], function(require) {
+        //         callback(null, require('../components/App/app.jsx'));
+        //     }, 'app');
+        // },
+        component: require('../components/App/app.jsx'),
         onEnter(nextState, replace, callback) {
             const check = checkAuth('', nextState);
             if (check) {
