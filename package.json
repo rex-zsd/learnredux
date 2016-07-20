@@ -5,13 +5,27 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "set NODE_ENV=development && export NODE_ENV=development && webpack-dev-server --config webpack.config.dev.js",
-    "prod": "set NODE_ENV=production && export NODE_ENV=production && webpack --config webpack.config.prod.js"
+    "_set": "set NODE_ENV=production && export NODE_ENV=production",
+    "dev": "webpack-dev-server --config webpack.config.dev.js",
+    "prod": "webpack --config webpack.config.prod.js",
+    "lint": "eslint --ext .jsx src"
   },
   "author": "rex-zsd",
   "license": "BSD-2-Clause",
   "dependencies": {
     "antd": "^1.5.0",
+    "es5-shim": "^4.5.9",
+    "es6-promise": "^3.2.1",
+    "isomorphic-fetch": "^2.2.1",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.4.1",
+    "react-router-redux": "^4.0.4",
+    "redux": "^3.5.2",
+    "redux-thunk": "^2.1.0"
+  },
+  "devDependencies": {
     "babel-core": "^6.9.1",
     "babel-loader": "^6.2.4",
     "babel-plugin-antd": "^0.4.0",
@@ -21,9 +35,11 @@
     "babel-preset-stage-0": "^6.5.0",
     "clean-webpack-plugin": "^0.1.9",
     "css-loader": "^0.23.1",
-    "es5-shim": "^4.5.9",
-    "es6-promise": "^3.2.1",
-    "extract-text-webpack-plugin": "^1.0.1",
+    "eslint": "^2.13.1",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-import": "^1.10.3",
+    "eslint-plugin-jsx-a11y": "^2.0.1",
+    "eslint-plugin-react": "^5.2.2",
     "file-loader": "^0.9.0",
     "gulp": "^3.9.1",
     "gulp-htmlone": "^0.1.9",
@@ -31,17 +47,9 @@
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
     "open-browser-webpack-plugin": "0.0.2",
-    "react": "^15.1.0",
-    "react-dom": "^15.1.0",
-    "react-redux": "^4.4.5",
-    "react-router": "^2.4.1",
-    "react-router-redux": "^4.0.4",
-    "redux": "^3.5.2",
-    "redux-thunk": "^2.1.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1"
-  },
-  "devDependencies": {}
+  }
 }

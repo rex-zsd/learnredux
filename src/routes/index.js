@@ -1,44 +1,18 @@
 import checkAuth from '../util/checkAuth.js';
+import App from '../components/App/app.jsx';
+import Index from './index/index';
+import Login from './login/index';
 
-const routes = {
-    component: 'div',
-    childRoutes: [{
-        path: '/',
-        // getComponent(location, callback) {
-        //     require.ensure([], function(require) {
-        //         callback(null, require('../components/App/app.jsx'));
-        //     }, 'app');
-        // },
-        component: require('../components/App/app.jsx'),
-        onEnter(nextState, replace, callback) {
-            const check = checkAuth('', nextState);
-            if (check) {
-                replace('/login');
-            }
-            callback();
+const createRoutes = (store) => ({
+  path: '/',
+  component: App,
+  onEnter: checkAuth,
+  onChange: checkAuth,
+  indexRoute: null,
+  childRoutes: [
+    Index(store),
+    Login(store)
+  ]
+});
 
-        },
-        onChange(prevState, nextState, replace, callback) {
-            const check = checkAuth('', nextState);
-            if (check) {
-                replace('/login');
-            }
-            callback();
-        },
-        // getIndexRoute(location, callback) {
-        //     require.ensure([], function(require) {
-        //         callback(null, {
-        //             component: require('./index/components/index.jsx')
-        //         })
-        //     }, 'index')
-        // },
-        childRoutes: [
-            require('./index/index.js'),
-            require('./user/index.js'),
-            require('./login/index.js')
-        ]
-
-    }]
-};
-
-export default routes;
+export default createRoutes;
