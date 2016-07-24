@@ -33,6 +33,7 @@ export default function configureStore(initialState = {}, history) {
     store.asyncReducers[key] = reducer;
     store.replaceReducer(reducers(store.asyncReducers));
   }
+  console.log(store);
 
   return store;
 }

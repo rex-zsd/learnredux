@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react';
+import React, {Component, PropTypes} from 'react';
 import styles from './style.less';
 console.log(PropTypes);
 const propTypes = {
@@ -6,7 +6,7 @@ const propTypes = {
   getDataAsync: PropTypes.func.isRequired
 };
 
-class Index extends React.Component {
+class Index extends Component {
   constructor(props) {
     super(props);
     console.log(props);
@@ -26,6 +26,8 @@ class Index extends React.Component {
     return (
       <div>
         <div className={styles.text}>{data.FName}</div>
+        hello world!
+        my app.hhhh
         <button onClick={this.handleClick} className={styles.button}>click</button>
       </div>
     )

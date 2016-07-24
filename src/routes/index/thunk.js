@@ -10,13 +10,11 @@ function fetchData() {
 }
 
 export function getDataAsync(config) {
-  return function (dispatch, getState) {
-    (async() => {
+  return async function (dispatch, getState) {
 
       var res = await fetchData();
       console.log(res);
       dispatch(getData(res.body));
-
-    })();
+      
   };
 }

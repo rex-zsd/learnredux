@@ -4,8 +4,8 @@ export default (store) => ({
 
     require.ensure([], (require) => {
 
-      const Login = require('./login.jsx').default;
-      const reducer = require('./login.reducer').default;
+      const Login = require('./container').default;
+      const reducer = require('./reducer').default;
 
       store.injectReducer({ key: 'user', reducer });
 
