@@ -1,17 +1,17 @@
 export default (store) => ({
-  path: 'index',
+  path: 'test',
   getComponent(location, callback) {
 
     require.ensure([], (require) => {
 
-      const Index = require('./container').default;
+      const Test = require('./container').default;
       const reducer = require('./reducer').default;
 
-      store.injectReducer({ key: 'index', reducer });
+      store.injectReducer({ key: 'test', reducer });
 
-      callback(null, Index);
+      callback(null, Test);
 
-    }, 'index');
+  }, 'test');
 
   }
 });

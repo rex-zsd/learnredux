@@ -1,15 +1,15 @@
 import Login from './components/Login';
 import { connect } from 'react-redux';
-import { loginAsync } from './thunk';
 
+//组织异步action方法
 const mapActionCreators = {
-  loginAsync
-};
 
+};
+//组织注入变量
 function mapStateToprops(state) {
   return {
-    user: state.user
+    aesKey: state.user.aesKey
   }
 }
-
+//注入方法与变量
 export default connect(mapStateToprops, mapActionCreators)(Login);

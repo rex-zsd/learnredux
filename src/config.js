@@ -1,9 +1,9 @@
 const config = {
   development: {
-    host: '//localhost:3000/'
+    assistantHost: 'http://t.assistant.120yibao.com/yb/'
   },
   production: {
-    host: '//localhost:9000'
+    host: 'http://localhost:9000'
   }
 };
 

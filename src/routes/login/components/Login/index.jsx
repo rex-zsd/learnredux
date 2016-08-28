@@ -2,23 +2,30 @@ import React, {Component, PropTypes} from 'react';
 
 const propTypes = {};
 
+class a extends Component {
+    constructor(props) {
+        super(props);
+        console.log(props);
+    }
+    
+}
 class Login extends Component {
-  constructor(props) {
-    super(props);
-    console.log(this);
-  }
+    constructor(props) {
+        super(props);
+        console.log(this);
+    }
 
-  componentDidMount() {
-    this.props.loginAsync();
-  }
+    componentDidMount() {
+        this.props.loginAssistantAsync();
+    }
 
-  render() {
-    return (
-      <div>
-        {this.props.user.body}
-      </div>
-    );
-  }
+    render() {
+        console.log(this.props);
+        return (
+            <div>
+            </div>
+        );
+    }
 
 }
 

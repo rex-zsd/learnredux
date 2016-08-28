@@ -1,7 +1,7 @@
 import checkAuth from '../util/checkAuth.js';
 import App from '../components/App/app.jsx';
-import Index from './index/index';
-import Login from './login/index';
+import Test from './test';
+import Login from './login';
 
 const createRoutes = (store) => ({
   path: '/',
@@ -10,7 +10,7 @@ const createRoutes = (store) => ({
   onChange: checkAuth,
   indexRoute: null,
   childRoutes: [
-    Index(store),
+    Test(store),
     Login(store)
   ]
 });
